@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getArticle } from '../api';
 import { useParams, Link } from 'react-router-dom';
 import Loading from './Loading';
+import ArticleComments from './ArticleComments';
 
 const Article = () => {
     
@@ -18,6 +19,8 @@ const Article = () => {
         })
     }, []);
     
+    // J.D: This is pretty messy, TODO: clean this up & consider styling these components later
+    
     return isLoading ? <Loading /> : (
         <div className='container'>
             <h1>Article!</h1>
@@ -33,6 +36,8 @@ const Article = () => {
             <p>Written by: { article.author }</p>
             <p>Posted at: { article.created_at }</p>
             <p><Link to={`/articles`}>Go Back To Articles</Link></p>
+            <h3>Comments</h3>
+            <ArticleComments article={article} />
         </div>
     );
 };
