@@ -8,3 +8,10 @@ export const getArticles = () => {
         return articles;
     });
 }
+
+export const getArticle = (id) => {
+    return ncNewsApi.get(`/articles/${id}`)
+    .then(({ data: { article }}) => {
+        return article;
+    });
+}
