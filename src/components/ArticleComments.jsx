@@ -3,7 +3,7 @@ import { getArticleComments } from '../api';
 import Comment from './Comment';
 import Loading from './Loading';
 
-const ArticleComments = ({ article }) => {
+const ArticleComments = ({ article, newComment }) => {
     
     const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ const ArticleComments = ({ article }) => {
             setComments(comments);
             setIsLoading(false);
         });
-    }, []);
+    }, [newComment]);
     
     return isLoading ? <Loading /> : (
         <ul className='card-list'>

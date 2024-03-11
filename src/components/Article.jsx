@@ -3,6 +3,7 @@ import { getArticle, patchArticleVotes } from '../api';
 import { useParams, Link } from 'react-router-dom';
 import Loading from './Loading';
 import ArticleComments from './ArticleComments';
+import CommentForm from './CommentForm';
 
 const Article = () => {
     
@@ -10,6 +11,7 @@ const Article = () => {
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [votes, setVotes] = useState(0);
+    const [newComment, setNewComment] = useState(null);
 
     useEffect(() => {
         setIsLoading(true);
@@ -58,7 +60,8 @@ const Article = () => {
             <p>Posted at: { article.created_at }</p>
             <p><Link to={`/articles`}>Go Back To Articles</Link></p>
             <h3>Comments</h3>
-            <ArticleComments article={article} />
+            <CommentForm article={article} setNewComment={setNewComment}/>
+            <ArticleComments article={article} newComment={newComment} />
         </div>
     );
 };
