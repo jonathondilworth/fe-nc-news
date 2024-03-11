@@ -29,3 +29,10 @@ export const patchArticleVotes = (articleId, voteInc) => {
         return article;
     });
 }
+
+export const postNewComment = (articleId, username, body) => {
+    return ncNewsApi.post(`/articles/${articleId}/comments`, { username: username, body: body})
+    .then(({ data: { comment }}) => {
+        return comment;
+    });
+}
