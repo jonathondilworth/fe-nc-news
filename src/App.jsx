@@ -22,6 +22,7 @@ function App() {
         <Route path='/articles' element={<Articles />} />
         <Route path='/article/:id' element={<Article />} />
         <Route path='/topics' element={<Topics />} />
+        <Route path='/topics/:topic' element={<Topics />} />
       </Routes>
       <Footer />
     </UserContext.Provider>
