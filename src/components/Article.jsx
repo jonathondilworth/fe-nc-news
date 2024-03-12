@@ -12,8 +12,20 @@ const Article = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [votes, setVotes] = useState(0);
     const [newComment, setNewComment] = useState(null);
+    const [error, setError] = useState({
+        triggered: false,
+        error: null
+    });
+
+    const resetError = () => {
+        setError({
+            triggered: false,
+            error: null
+        });
+    }
 
     useEffect(() => {
+        resetError();
         setIsLoading(true);
         getArticle(id)
         .then((article) => {
@@ -21,6 +33,12 @@ const Article = () => {
             setVotes(article.votes);
             setIsLoading(false);
         })
+        .catch((res) => {
+            setError({
+                triggered: true,
+                error: res.message
+            });
+        });
     }, []);
     
     const handleUpvote = () => {
@@ -46,7 +64,13 @@ const Article = () => {
 
     // J.D: This is pretty messy, TODO: clean this up & consider styling these components later
     
-    return isLoading ? <Loading /> : (
+    return error.triggered ? (
+        <>
+            <h2>Something went wrong...</h2>
+            <p>{ error.error }</p>
+            <Link to='/articles'>Go back to all articles.</Link>
+        </>
+    ) : isLoading ? <Loading /> : (
         <div className='container'>
             <h1>Article!</h1>
             <h2>{ article.title }</h2>
