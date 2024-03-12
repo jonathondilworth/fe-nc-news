@@ -36,3 +36,10 @@ export const postNewComment = (articleId, username, body) => {
         return comment;
     });
 }
+
+export const deleteComment = (commentId) => {
+    return ncNewsApi.delete(`/comments/${commentId}`)
+    .then((response) => {
+        return response.status === 204;
+    });
+}
