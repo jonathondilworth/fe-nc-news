@@ -20,7 +20,7 @@ const ArticleComments = ({ article, newComment }) => {
     return isLoading ? <Loading /> : (
         <ul className='card-list'>
             {comments.map((comment) => (
-                <Comment key={comment.comment_id} comment={comment} />
+                <Comment key={comment.comment_id} comment={comment} setComments={setComments} />
             ))}
         </ul>
     );
