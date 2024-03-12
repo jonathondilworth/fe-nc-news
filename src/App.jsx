@@ -1,6 +1,6 @@
 import './App.css'
 import Nav from './components/Nav';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from './components/Home';
 import Articles from './components/Articles';
 import Topics from './components/Topics';
@@ -23,6 +23,7 @@ function App() {
         <Route path='/article/:id' element={<Article />} />
         <Route path='/topics' element={<Topics />} />
         <Route path='/topics/:topic' element={<Topics />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />
     </UserContext.Provider>

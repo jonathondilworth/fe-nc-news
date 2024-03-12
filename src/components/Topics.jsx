@@ -10,13 +10,31 @@ const Topics = () => {
 
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState({
+        triggered: false,
+        error: null
+    });
+
+    const resetError = () => {
+        setError({
+            triggered: false,
+            error: null
+        });
+    }
 
     useEffect(() => {
+        resetError();
         setIsLoading(true);
         getArticles(topic)
         .then((articles) => {
             setArticles(articles);
             setIsLoading(false);
+        })
+        .catch((res) => {
+            setError({
+                triggered: true,
+                error: res.message
+            });
         });
     }, [topic]);
 
@@ -32,7 +50,15 @@ const Topics = () => {
                 <div className='nav-link'><Link style={{color: '#133337'}} to='/topics/cooking'>Cooking</Link></div>
                 <div className='nav-link'><Link style={{color: '#133337'}} to='/topics/football'>Football</Link></div>
             </div>
-            { isLoading ? <Loading /> : <ArticleList articles={articles} /> }
+            { error.triggered ? (
+                <>
+                    <h2>Something went wrong...</h2>
+                    <p>{ error.error }</p>
+                    <Link to='/topics'>Go back to all topics.</Link>
+                </>
+            ) : (
+                isLoading ? <Loading /> : <ArticleList articles={articles} />
+            )}
         </div>
     );
 };
