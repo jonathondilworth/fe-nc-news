@@ -12,17 +12,16 @@ const Comment = ({ comment, setComments }) => {
         setIsLoading(true);
         deleteComment(comment.comment_id)
         .then((success) => {
-            if (!success) {
-                alert("Failed to delete comment.");
-                return;
-            }
-            // else: 204 status, remove comment from page
             setComments((currComments) => {
                 return currComments.filter((existingComment) => {
                     return existingComment.comment_id !== comment.comment_id
                 });
             });
             alert("Deleted comment!");
+            setIsLoading(false);
+        })
+        .catch((err) => {
+            alert("Failed to delete comment.");
             setIsLoading(false);
         });
     }
