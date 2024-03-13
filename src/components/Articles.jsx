@@ -27,7 +27,6 @@ const Articles = () => {
 
     return (
         <div className='container'>
-            <h1>Articles!</h1>
             <Filters setFilters={setFilters} />
             { isLoading ? <Loading /> : <ArticleList articles={articles} /> }
         </div>
