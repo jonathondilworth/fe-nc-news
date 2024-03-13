@@ -11,11 +11,11 @@ const Article = () => {
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [votes, setVotes] = useState(0);
-    const [newComment, setNewComment] = useState(null);
     const [error, setError] = useState({
         triggered: false,
         error: null
     });
+    const [hasVoted, setHasVoted] = useState(false);
 
     const resetError = () => {
         setError({
@@ -45,6 +45,7 @@ const Article = () => {
         setVotes((currVotes) => {
             return currVotes + 1;
         });
+        setHasVoted(true);
         // J.D: TODO: More appropriate handle any errors? Alternatively: fire & forget (remove catch)
         patchArticleVotes(article.article_id, 1)
         .catch((err) => {
@@ -56,6 +57,7 @@ const Article = () => {
         setVotes((currVotes) => {
             return currVotes - 1;
         });
+        setHasVoted(true);
         patchArticleVotes(article.article_id, -1)
         .catch((err) => {
             alert("Oh noes, failed to downvote!")
@@ -78,14 +80,13 @@ const Article = () => {
             <p>{ article.body }</p>
             <p>Topic: { article.topic }</p>
             <span>Votes: { votes }</span>
-            <button onClick={handleUpvote}>Upvote</button>
-            <button onClick={handleDownvote}>Downvote</button>
+            <button onClick={handleUpvote} disabled={hasVoted}>Upvote</button>
+            <button onClick={handleDownvote} disabled={hasVoted}>Downvote</button>
             <p>Written by: { article.author }</p>
             <p>Posted at: { article.created_at }</p>
             <p><Link to={`/articles`}>Go Back To Articles</Link></p>
             <h3>Comments</h3>
-            <CommentForm article={article} setNewComment={setNewComment}/>
-            <ArticleComments article={article} newComment={newComment} />
+            <ArticleComments article={article} />
         </div>
     );
 };

@@ -3,7 +3,7 @@ import UserContext from '../contexts/UserContext';
 import { postNewComment } from '../api';
 import Loading from './Loading';
 
-const CommentForm = ({ article, setNewComment }) => {
+const CommentForm = ({ article, setComments }) => {
 
     const { currentUser } = useContext(UserContext);
 
@@ -34,10 +34,10 @@ const CommentForm = ({ article, setNewComment }) => {
         postNewComment(article.article_id, currentUser, newCommentInput)
         .then((comment) => {
             alert("New Comment Added!");
-            // triggers a re-render in ArticleComments.jsx
-            setNewComment({
-                username: currentUser,
-                body: newCommentInput
+            setComments((currComments) => {
+                const updatedComments = [...currComments];
+                updatedComments.unshift(comment);
+                return updatedComments;
             });
             setNewCommentInput("");
             setIsLoading(false);

@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getArticleComments } from '../api';
 import Comment from './Comment';
 import Loading from './Loading';
+import CommentForm from './CommentForm';
 
-const ArticleComments = ({ article, newComment }) => {
+const ArticleComments = ({ article }) => {
     
     const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -15,14 +16,19 @@ const ArticleComments = ({ article, newComment }) => {
             setComments(comments);
             setIsLoading(false);
         });
-    }, [newComment]);
+    }, []);
     
-    return isLoading ? <Loading /> : (
+    return (
+        <>
+        <CommentForm article={article} setComments={setComments}/>
+        {isLoading ? <Loading /> : (
         <ul className='card-list'>
             {comments.map((comment) => (
                 <Comment key={comment.comment_id} comment={comment} setComments={setComments} />
             ))}
         </ul>
+        )}
+        </>
     );
 };
 
