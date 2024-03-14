@@ -44,7 +44,7 @@ const CommentForm = ({ article, setComments }) => {
         });
     }
 
-    return (
+    return currentUser ? (
         <>
         <div className="mt-6 mb-6 flex gap-x-3">
         <form onSubmit={handleSubmit} className="relative flex-auto">
@@ -78,7 +78,7 @@ const CommentForm = ({ article, setComments }) => {
         </form>
         </div>
         </>
-    );
+    ) : '';
 
     // return isLoading ? <Loading /> : (
     //     <form onSubmit={handleSubmit}>

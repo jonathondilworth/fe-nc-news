@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Article from './components/Article';
 import UserContext from './contexts/UserContext';
 import { useState } from 'react';
+import Login from './components/Login';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/article/:id' element={<Article />} />
         <Route path='/topics' element={<Topics />} />
         <Route path='/topics/:topic' element={<Topics />} />
+        <Route path='/login' element={<Login />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Footer />

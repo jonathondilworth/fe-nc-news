@@ -4,7 +4,7 @@ Frontend React app for a simple news application
 
 For the API backend, see [this repo](https://github.com/jonathondilworth/nc-news)
 
-See the live example hosted [here](https://65f04068d8cf50a84d4af8da--fe-nc-news-draft.netlify.app/articles) (draft)
+See the live example hosted [here](https://fe-nc-news-draft.netlify.app)
 
 ## Getting Started
 

@@ -43,3 +43,10 @@ export const deleteComment = (commentId) => {
         return response.status === 204;
     });
 }
+
+export const getUser = (username) => {
+    return ncNewsApi.get(`/users/${username}`)
+    .then((response) => {
+        return response;
+    });
+}

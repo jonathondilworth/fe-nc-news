@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import UserContext from '../contexts/UserContext';
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
     { name: 'Home', href: '/' },
@@ -12,7 +14,15 @@ const navigation = [
 
 const Nav = () => {
 
+    const navigate = useNavigate();
+
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const { currentUser, setCurrentUser } = useContext(UserContext);
+
+    const handleSignOut = () => {
+        setCurrentUser(null);
+        navigate('/');
+    };
 
     return (
         <header className="bg-white">
@@ -42,9 +52,15 @@ const Nav = () => {
               <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />
             </Link>
             <div className="flex flex-1 justify-end">
-              <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900">
-                Log in <span aria-hidden="true">&rarr;</span>
-              </Link>
+              { currentUser ? (
+                <a href="#" className="text-sm font-semibold leading-6 text-gray-900" onClick={handleSignOut}>
+                    Sign Out <span aria-hidden="true">&rarr;</span>
+                </a>
+              ) : (
+                <Link to="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                    Log in <span aria-hidden="true">&rarr;</span>
+                </Link>
+              )}
             </div>
           </nav>
           <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
