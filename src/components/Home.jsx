@@ -11,7 +11,7 @@ const Home = () => {
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">NC News</h2>
             <p className="mt-6 text-lg leading-8 text-gray-300">
-              A social news aggregation, web content rating and discussion website.
+            A React app frontend for a simple news application that enables user actions such as signing in and out, commenting on articles, voting on articles and filtering & searching articles. In short, NC news is a social news aggregation, web content rating and discussion website.
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               { currentUser ? `Hello, ${currentUser}` : (

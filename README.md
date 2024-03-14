@@ -1,10 +1,10 @@
 # fe-nc-news
 
-Frontend React app for a simple news application
-
-For the API backend, see [this repo](https://github.com/jonathondilworth/nc-news)
+A React app frontend for a simple news application that enables user actions such as signing in and out, commenting on articles, voting on articles and filtering & searching articles. In short, NC news is a social news aggregation, web content rating and discussion website.
 
 See the live example hosted [here](https://fe-nc-news-draft.netlify.app)
+
+To review the backend API, see [this repo](https://github.com/jonathondilworth/nc-news)
 
 ## Getting Started
 
